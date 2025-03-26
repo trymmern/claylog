@@ -7,8 +7,10 @@ import {
   ScrollRestoration,
 } from "react-router";
 
+import { ThemeProvider } from "@material-tailwind/react";
 import type { Route } from "./+types/root";
 import "./app.css";
+import { StickyNavbar } from "./components/navigation/StickyNavbar";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -42,7 +44,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <ThemeProvider>
+      <main className="mx-32">
+        <StickyNavbar />
+        <Outlet />
+      </main>
+    </ThemeProvider>
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
